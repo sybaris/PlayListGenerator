@@ -23,8 +23,8 @@ namespace PlayListGenerator
             CommandLine.Parser parser = new CommandLine.Parser(
                 with =>
                 {
-                    with.HelpWriter = Console.Error;
-                    //with.HelpWriter = null; // To display myself the help
+                    //with.HelpWriter = Console.Error;
+                    with.HelpWriter = null; // To display myself the help
                     with.IgnoreUnknownArguments = false;
                 }
                 );
@@ -48,7 +48,7 @@ namespace PlayListGenerator
         private static void HandleParseError(IEnumerable<Error> errs, ParserResult<CommandLineArguments> parsingResult)
         {
             // Display a customized format of my Help
-            Console.WriteLine("=============================================");
+            //Console.WriteLine("=============================================");
             HelpText myHelpText = HelpText.AutoBuild(parsingResult, onError =>
             {
                 HelpText nHelpText = new HelpText(SentenceBuilder.Create());
