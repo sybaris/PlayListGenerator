@@ -64,5 +64,5 @@ Will generate the following files :
 
 ### Example 5 (xspf file format)
 ```
-C:\>PlayListGenerator.exe "c:\songs\albumA\*.mp3" "playlist.m3u" -F xspf
+C:\>PlayListGenerator.exe "c:\songs\albumA\*.mp3" "playlist.xspf" -F xspf
 ```
