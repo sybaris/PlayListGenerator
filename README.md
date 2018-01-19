@@ -13,6 +13,8 @@ For all the following example, imagine that you have these 4 mp3 files on your d
 - c:\songs\albumB\songB1.mp3
 - c:\songs\albumB\songB1.mp3
 
+![alt text](https://raw.githubusercontent.com/sybaris/PlayListGenerator/docs/Example0.jpg)
+
 ### Example 1 (basic usage - absolute path)
 ```
 C:\>PlayListGenerator.exe "c:\songs\albumA\*.mp3" "playlist.m3u"
@@ -23,6 +25,8 @@ Will generate the following "c:\songs\albumA\playlist.m3u" file :
 - c:\songs\albumA\songA1.mp3
 - c:\songs\albumA\songA2.mp3
 
+![alt text](https://raw.githubusercontent.com/sybaris/PlayListGenerator/docs/Example1.jpg)
+
 ### Example 2 (basic usage - relative path)
 ```
 C:\>PlayListGenerator.exe "c:\songs\albumA\*.mp3" "playlist.m3u" -R
@@ -32,6 +36,8 @@ Will generate the following "c:\songs\albumA\playlist.m3u" file :
 
 - songA1.mp3
 - songA2.mp3
+
+![alt text](https://raw.githubusercontent.com/sybaris/PlayListGenerator/docs/Example2.jpg)
 
 ### Example 3 (recursive usage - relative path)
 ```
@@ -44,6 +50,8 @@ Will generate the following "c:\songs\playlist.m3u" file :
 - albumA\songA2.mp3
 - albumB\songB1.mp3
 - albumB\songB1.mp3
+
+![alt text](https://raw.githubusercontent.com/sybaris/PlayListGenerator/docs/Example3.jpg)
 
 ### Example 4 (OnePlaylistByFolder usage - relative path)
 ```
@@ -62,7 +70,11 @@ Will generate the following files :
 - songB1.mp3
 - songB1.mp3
 
+![alt text](https://raw.githubusercontent.com/sybaris/PlayListGenerator/docs/Example4.jpg)
+
 ### Example 5 (xspf file format)
 ```
 C:\>PlayListGenerator.exe "c:\songs\albumA\*.mp3" "playlist.xspf" -F xspf
 ```
+
+![alt text](https://raw.githubusercontent.com/sybaris/PlayListGenerator/docs/Example5.jpg)

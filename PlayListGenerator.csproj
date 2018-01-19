@@ -61,6 +61,14 @@
     <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="docs\Example0.jpg" />
+    <Content Include="docs\Example1.jpg" />
+    <Content Include="docs\Example2.jpg" />
+    <Content Include="docs\Example3.jpg" />
+    <Content Include="docs\Example4.jpg" />
+    <Content Include="docs\Example5.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
