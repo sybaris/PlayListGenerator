@@ -102,6 +102,9 @@ namespace PlayListGenerator
             string directory = dirAndMask.Item1;
             string mask = dirAndMask.Item2;
 
+            if (string.IsNullOrEmpty(directory))
+                directory = Path.GetPathRoot(args.PlayListFilename);
+
             // In fonction of OnePlaylistByFolder option treatment is different
             if (!args.OnePlaylistByFolder)
             {

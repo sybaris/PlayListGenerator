@@ -51,7 +51,7 @@ namespace PlayListGenerator
             if (!Directory.Exists(directory))
             {
                 directory = Path.GetDirectoryName(directory);
-                if (!Directory.Exists(directory))
+                if (!Directory.Exists(directory) && directory != "")
                     throw new Exception("Wrong Path : " + aPathAndMask);
                 mask = aPathAndMask.Remove(0, directory.Length);
                 if (mask.StartsWith(Path.DirectorySeparatorChar.ToString()))
