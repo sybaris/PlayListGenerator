@@ -26,6 +26,7 @@ namespace PlayListGenerator
                     //with.HelpWriter = Console.Error;
                     with.HelpWriter = null; // To display myself the help
                     with.IgnoreUnknownArguments = false;
+                    with.CaseSensitive = false;
                 }
                 );
 
@@ -104,6 +105,8 @@ namespace PlayListGenerator
 
             if (string.IsNullOrEmpty(directory))
                 directory = Path.GetPathRoot(args.PlayListFilename);
+            if (string.IsNullOrEmpty(directory))
+                directory = ".";
 
             // In fonction of OnePlaylistByFolder option treatment is different
             if (!args.OnePlaylistByFolder)
@@ -150,7 +153,7 @@ namespace PlayListGenerator
             aPlaylistGenerator.GeneratePlayList(aPlayListFilename, files);
 
             // Display a result on the console to inform user
-            Console.WriteLine(string.Format("Playlist \"{0}\" generated with \"{1}\" files", aPlayListFilename, files.Count));
+            Console.WriteLine(string.Format("Playlist \"{0}\" generated with \"{1}\" files from directory \"{2}\"", aPlayListFilename, files.Count, aDirectory));
         }
 
     }
