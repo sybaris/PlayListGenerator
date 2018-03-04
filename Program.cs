@@ -155,7 +155,6 @@ namespace PlayListGenerator
             // Display a result on the console to inform user
             Console.WriteLine(string.Format("Playlist \"{0}\" generated with \"{1}\" files from directory \"{2}\"", aPlayListFilename, files.Count, aDirectory));
         }
-
     }
 }
 
