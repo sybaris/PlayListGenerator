@@ -1,4 +1,5 @@
 ﻿[![Build Status](https://travis-ci.org/sybaris/PlayListGenerator.svg?branch=master)](https://travis-ci.org/sybaris/PlayListGenerator)
+[![Downloads](https://img.shields.io/github/downloads/sybaris/PlayListGenerator/latest/total.svg?maxAge=86400)](https://github.com/sybaris/PlayListGenerator/releases/latest)
 # PlayListGenerator
 
 The main goal of this tool is to generate playlist file (m3u or xspf format).
@@ -7,7 +8,7 @@ It can be any music or video files.
 
 # Downloads
 Follow this link to download the latest version : <a href="https://github.com/sybaris/PlayListGenerator/releases/latest">[ Download ]</a>
-![alt text](https://img.shields.io/github/downloads/sybaris/PlayListGenerator/latest/total.svg?maxAge=86400)
+
 # Examples
 
 For all the following example, imagine that you have these 4 mp3 files on your disk :
