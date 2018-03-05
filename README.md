@@ -5,6 +5,10 @@ The main goal of this tool is to generate playlist file (m3u or xspf format).
 These playlists are usable by winamp or vlc for example.
 It can be any music or video files.
 
+# Downloads
+<a href="https://github.com/sybaris/PlayListGenerator/releases/latest">[ Download ]</a>
+<img src=https://img.shields.io/github/downloads/sybaris/PlayListGenerator/latest/total.svg?maxAge=86400 alt="Github Releases (latest)">
+
 # Examples
 
 For all the following example, imagine that you have these 4 mp3 files on your disk :
