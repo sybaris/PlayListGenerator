@@ -1,4 +1,5 @@
-﻿# PlayListGenerator
+﻿[![Build Status](https://travis-ci.org/sybaris/PlayListGenerator.svg?branch=master)](https://travis-ci.org/sybaris/PlayListGenerator)
+# PlayListGenerator
 
 The main goal of this tool is to generate playlist file (m3u or xspf format).
 These playlists are usable by winamp or vlc for example.
