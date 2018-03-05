@@ -8,7 +8,7 @@ It can be any music or video files.
 # Downloads
 <a href="https://github.com/sybaris/PlayListGenerator/releases/latest">[ Download ]</a>
 <a href="https://github.com/sybaris/PlayListGenerator/releases/latest" rel="nofollow" style="vertical-align: -webkit-baseline-middle;">
-<img src=https://img.shields.io/github/downloads/sybaris/PlayListGenerator/latest/total.svg?maxAge=86400 alt="Github Releases (latest)">
+<img src=https://img.shields.io/github/downloads/sybaris/PlayListGenerator/latest/total.svg?maxAge=86400 alt="Github Releases (latest)"></img>
 </a>
 
 # Examples
