@@ -2,7 +2,6 @@ language: csharp
 solution: PlayListGenerator.sln
 deploy:
     provider: releases
-    api_key: $GITHUB_OAUTH_TOKEN
     skip_cleanup: true
     on:
       tags: true
