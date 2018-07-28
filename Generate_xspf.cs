@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlayListGenerator
 {
@@ -11,6 +7,13 @@ namespace PlayListGenerator
     /// </summary>
     internal class Generate_xspf : GeneratePlaylistBase
     {
+        public override string FileExtension
+        {
+            get
+            {
+                return "xspf";
+            }
+        }
 
         protected override string GetHeader()
         {

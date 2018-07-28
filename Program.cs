@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommandLine;
-using System.Diagnostics;
+﻿using CommandLine;
 using CommandLine.Text;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace PlayListGenerator
 {
@@ -83,7 +80,8 @@ namespace PlayListGenerator
         /// </summary>
         /// <param name="args"></param>
         private static void Run(CommandLineArguments args)
-        {
+        {          
+
             // Create the file generator
             GeneratePlaylistBase playlistGenerator;
             switch (args.Format)
@@ -97,6 +95,8 @@ namespace PlayListGenerator
                 default:
                     throw new Exception("Unkown playlist format");
             }
+
+            args.PlayListFilename = string.IsNullOrEmpty(args.PlayListFilename) ? $"default.{playlistGenerator.FileExtension}" : args.PlayListFilename; 
 
             // Separate directory and file mask
             var dirAndMask = PathHelper.ExtractDirectoryandMask(args.PathAndMask);
@@ -120,6 +120,12 @@ namespace PlayListGenerator
                 List<string> directories = new List<string>(Directory.EnumerateDirectories(directory));
                 foreach (var dir in directories)
                 {
+
+                    if (args.UseCurrentFolderAsPlaylistName)
+                    {
+                        args.PlayListFilename = Path.Combine(dir, $"{dir.Split(Path.DirectorySeparatorChar).Last()}.{playlistGenerator.FileExtension}");
+                    }
+                    
                     // Generate playlist of the folder
                     Run(playlistGenerator, dir, mask, Path.Combine(dir, args.PlayListFilename), args.RelativePath, args.Recursive);
                 }

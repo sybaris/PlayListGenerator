@@ -1,10 +1,6 @@
 ﻿using CommandLine;
 using CommandLine.Text;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlayListGenerator
 {
@@ -26,7 +22,7 @@ namespace PlayListGenerator
 
         [Value(0, HelpText = "[drive:][path][filename_or_mask]", Required = true)]
         public string PathAndMask { get; set; }
-        [Value(1, HelpText = "[filename]", Required = true)]
+        [Value(1, HelpText = "[filename]", Required = false)]
         public string PlayListFilename { get; set; }
         [Option('S', "SubDirectories", HelpText = "Include subdirectories (recursive)")]
         public bool Recursive { get; set; }
@@ -37,6 +33,9 @@ namespace PlayListGenerator
 
         [Option('O', "OnePlaylistByFolder", HelpText = "Create 1 playlist by folder of the current folder")]
         public bool OnePlaylistByFolder { get; set; }
+
+        [Option('U', "UseCurrentFolderAsPlaylistName", HelpText = "If OnePlaylistByFolder(O) and SubDirectories(S) options selected, then combine this option to use the current folder as PlayListFilename. Usefull to avoid using the same PlayListFilename for all playlist generated")]
+        public bool UseCurrentFolderAsPlaylistName { get; set; }
 
         [Usage()]
         public static IEnumerable<Example> Examples

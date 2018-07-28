@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlayListGenerator
 {
@@ -12,6 +8,14 @@ namespace PlayListGenerator
     class Generate_m3u : GeneratePlaylistBase
     {
 
+        public override string FileExtension
+        {
+            get
+            {
+                return "m3u";
+            }
+        }
+        
         protected override string GetHeader()
         {
             return "#EXTM3U"+Environment.NewLine;

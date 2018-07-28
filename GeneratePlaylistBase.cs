@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PlayListGenerator
 {
@@ -12,6 +9,16 @@ namespace PlayListGenerator
     /// </summary>
     internal abstract class GeneratePlaylistBase
     {
+        
+        /// <summary>
+        /// Return the file extension for the playlist.
+        /// </summary>
+        /// <returns></returns>
+        public abstract string FileExtension
+        {
+            get;
+        }
+        
         /// <summary>
         /// Method that will be called to generate the playlist file
         /// </summary>
@@ -33,7 +40,7 @@ namespace PlayListGenerator
             fileContent.Append(GetFooter());
 
             // Generate the playlist file
-            File.WriteAllText(aPlayListFileName, fileContent.ToString());
+            File.WriteAllText(aPlayListFileName, fileContent.ToString(), Encoding.UTF8);
         }
 
         /// <summary>
