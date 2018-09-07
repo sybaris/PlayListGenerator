@@ -80,7 +80,7 @@ namespace PlayListGenerator
         /// </summary>
         /// <param name="args"></param>
         private static void Run(CommandLineArguments args)
-        {          
+        {
 
             // Create the file generator
             GeneratePlaylistBase playlistGenerator;
@@ -96,7 +96,7 @@ namespace PlayListGenerator
                     throw new Exception("Unkown playlist format");
             }
 
-            args.PlayListFilename = string.IsNullOrEmpty(args.PlayListFilename) ? $"default.{playlistGenerator.FileExtension}" : args.PlayListFilename; 
+            args.PlayListFilename = string.IsNullOrEmpty(args.PlayListFilename) ? $"default.{playlistGenerator.FileExtension}" : args.PlayListFilename;
 
             // Separate directory and file mask
             var dirAndMask = PathHelper.ExtractDirectoryandMask(args.PathAndMask);
@@ -112,7 +112,7 @@ namespace PlayListGenerator
             if (!args.OnePlaylistByFolder)
             {
                 // Only 1 playlist file will be generated
-                Run(playlistGenerator, directory, mask, Path.Combine(directory, args.PlayListFilename), args.RelativePath, args.Recursive);
+                Run(playlistGenerator, directory, mask, Path.Combine(directory, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist);
             }
             else
             {
@@ -125,9 +125,9 @@ namespace PlayListGenerator
                     {
                         args.PlayListFilename = Path.Combine(dir, $"{dir.Split(Path.DirectorySeparatorChar).Last()}.{playlistGenerator.FileExtension}");
                     }
-                    
+
                     // Generate playlist of the folder
-                    Run(playlistGenerator, dir, mask, Path.Combine(dir, args.PlayListFilename), args.RelativePath, args.Recursive);
+                    Run(playlistGenerator, dir, mask, Path.Combine(dir, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist);
                 }
             }
         }
@@ -141,7 +141,7 @@ namespace PlayListGenerator
         /// <param name="aPlayListFilename">name of the playlist file</param>
         /// <param name="aRelativePath">Works with relative or absolute paths</param>
         /// <param name="aRecursive">Include subfolders or not</param>
-        private static void Run(GeneratePlaylistBase aPlaylistGenerator, string aDirectory, string aMask, string aPlayListFilename, bool aRelativePath, bool aRecursive)
+        private static void Run(GeneratePlaylistBase aPlaylistGenerator, string aDirectory, string aMask, string aPlayListFilename, bool aRelativePath, bool aRecursive, int minimumSong)
         {
             // List the file to include in the playlist
             List<string> files = new List<string>(Directory.EnumerateFiles(aDirectory, aMask, ConvertToSearchOption(aRecursive)));
@@ -156,10 +156,13 @@ namespace PlayListGenerator
             }
 
             // Generate the playlist file
-            aPlaylistGenerator.GeneratePlayList(aPlayListFilename, files);
+            if (files.Count >= minimumSong)
+            {
+                aPlaylistGenerator.GeneratePlayList(aPlayListFilename, files);
 
-            // Display a result on the console to inform user
-            Console.WriteLine(string.Format("Playlist \"{0}\" generated with \"{1}\" files from directory \"{2}\"", aPlayListFilename, files.Count, aDirectory));
+                // Display a result on the console to inform user
+                Console.WriteLine(string.Format("Playlist \"{0}\" generated with \"{1}\" files from directory \"{2}\"", aPlayListFilename, files.Count, aDirectory));
+            }
         }
     }
 }

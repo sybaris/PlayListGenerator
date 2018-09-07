@@ -34,8 +34,12 @@ namespace PlayListGenerator
         [Option('O', "OnePlaylistByFolder", HelpText = "Create 1 playlist by folder of the current folder")]
         public bool OnePlaylistByFolder { get; set; }
 
+        [Option('M', "MinimumSongByPlaylist", HelpText = "Number minimum of song(s) in a playlist. Under this number a playlist will not be generated. If unspecified, minimum is 0.", Default = 0)]
+        public int MinimumSongByPlaylist { get; set; }
+
         [Option('U', "UseCurrentFolderAsPlaylistName", HelpText = "If OnePlaylistByFolder(O) and SubDirectories(S) options selected, then combine this option to use the current folder as PlayListFilename. Usefull to avoid using the same PlayListFilename for all playlist generated")]
         public bool UseCurrentFolderAsPlaylistName { get; set; }
+
 
         [Usage()]
         public static IEnumerable<Example> Examples
