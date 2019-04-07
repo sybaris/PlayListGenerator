@@ -112,7 +112,7 @@ namespace PlayListGenerator
             if (!args.OnePlaylistByFolder)
             {
                 // Only 1 playlist file will be generated
-                Run(playlistGenerator, directory, mask, Path.Combine(directory, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist);
+                Run(playlistGenerator, directory, mask, Path.Combine(directory, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist, args.SkipIfFileAlreadyExists);
             }
             else
             {
@@ -127,7 +127,7 @@ namespace PlayListGenerator
                     }
 
                     // Generate playlist of the folder
-                    Run(playlistGenerator, dir, mask, Path.Combine(dir, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist);
+                    Run(playlistGenerator, dir, mask, Path.Combine(dir, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist, args.SkipIfFileAlreadyExists);
                 }
             }
         }
@@ -141,8 +141,17 @@ namespace PlayListGenerator
         /// <param name="aPlayListFilename">name of the playlist file</param>
         /// <param name="aRelativePath">Works with relative or absolute paths</param>
         /// <param name="aRecursive">Include subfolders or not</param>
-        private static void Run(GeneratePlaylistBase aPlaylistGenerator, string aDirectory, string aMask, string aPlayListFilename, bool aRelativePath, bool aRecursive, int minimumSong)
+        /// <param name="minimumSong">Minimum songs to be included in playlist</param>
+        /// <param name="aSkipIfFileAlreadyExists">If file already exists, do not overwrite it</param>
+        private static void Run(GeneratePlaylistBase aPlaylistGenerator, string aDirectory, string aMask, string aPlayListFilename, bool aRelativePath, bool aRecursive, int minimumSong, bool aSkipIfFileAlreadyExists)
         {
+            if (aSkipIfFileAlreadyExists && File.Exists(aPlayListFilename))
+            {
+                // Display on the console to inform user
+                Console.WriteLine($"Skipped : Playlist \"{aPlayListFilename}\" because file already exists");
+                return;
+            }
+            
             // List the file to include in the playlist
             List<string> files = new List<string>(Directory.EnumerateFiles(aDirectory, aMask, ConvertToSearchOption(aRecursive)));
 
@@ -155,14 +164,18 @@ namespace PlayListGenerator
                     files[i] = PathHelper.MakeRelative(files[i], referencePath);
             }
 
-            // Generate the playlist file
-            if (files.Count >= minimumSong)
+            if (files.Count < minimumSong)
             {
-                aPlaylistGenerator.GeneratePlayList(aPlayListFilename, files);
-
-                // Display a result on the console to inform user
-                Console.WriteLine(string.Format("Playlist \"{0}\" generated with \"{1}\" files from directory \"{2}\"", aPlayListFilename, files.Count, aDirectory));
+                // Display on the console to inform user
+                Console.WriteLine($"Minimun : Playlist \"{aPlayListFilename}\" not generated because threshold not reached");
+                return;
             }
+
+            // Generate the playlist file
+            aPlaylistGenerator.GeneratePlayList(aPlayListFilename, files);
+
+            // Display a result on the console to inform user
+            Console.WriteLine($"Generated : Playlist \"{aPlayListFilename}\" with \"{files.Count}\" files from directory \"{aDirectory}\"");
         }
     }
 }
