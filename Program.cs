@@ -81,7 +81,75 @@ namespace PlayListGenerator
         /// <param name="args"></param>
         private static void Run(CommandLineArguments args)
         {
+            if (args.CheckMode)
+                RunCheckPlayList(args);
+            else
+                RunGeneratePlayList(args);
+        }
 
+        /// <summary>
+        /// Check if the playlist file is correct
+        /// </summary>
+        /// <param name="aPlayListFilename">Name of the playlist to check</param>
+        /// <returns>true = playlist is correct, false = a problem has been found</returns>
+        private static bool RunCheckOneFile(string aPlayListFilename)
+        {
+            Debug.Assert(File.Exists(aPlayListFilename));
+            var check_m3u = new Check_m3u();
+            var result = check_m3u.CheckM3uFile(aPlayListFilename);
+            if (!string.IsNullOrEmpty(result))
+            {
+                Console.WriteLine($"KO - File {aPlayListFilename} have this problem : {result}");
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Run the program with the parsed arguments of the command line to generate a playlist 
+        /// </summary>
+        /// <param name="args"></param>
+        private static void RunCheckPlayList(CommandLineArguments args)
+        {
+            string playListFilename = args.PathAndMask;
+            if (File.Exists(playListFilename))
+            {
+                var result = RunCheckOneFile(playListFilename);
+                if (result)
+                    Console.WriteLine($"All ok - {playListFilename}");
+            }
+            else if (args.Recursive)
+            {
+                // Separate directory and file mask
+                var dirAndMask = PathHelper.ExtractDirectoryandMask(playListFilename);
+                string directory = dirAndMask.Item1;
+                string mask = dirAndMask.Item2;
+
+                var playLists = Directory.GetFiles(directory, mask, SearchOption.AllDirectories);
+                int count = playLists.Count();
+                int countError = 0;
+                foreach (var playlist in playLists)
+                {
+                    var result = RunCheckOneFile(playlist);
+                    if (!result)
+                        countError++;
+                }
+
+                if (countError == 0)
+                    Console.WriteLine($"All the {count} files are ok.");
+                else
+                    Console.WriteLine($"{countError}/{count} files have a problem.");
+            }
+            else
+                Console.WriteLine($"File {playListFilename} to check was not found");
+        }
+
+        /// <summary>
+        /// Run the program with the parsed arguments of the command line to generate a playlist 
+        /// </summary>
+        /// <param name="args"></param>
+        private static void RunGeneratePlayList(CommandLineArguments args)
+        {
             // Create the file generator
             GeneratePlaylistBase playlistGenerator;
             switch (args.Format)
@@ -112,7 +180,7 @@ namespace PlayListGenerator
             if (!args.OnePlaylistByFolder)
             {
                 // Only 1 playlist file will be generated
-                Run(playlistGenerator, directory, mask, Path.Combine(directory, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist, args.SkipIfFileAlreadyExists);
+                RunGeneratePlayList(playlistGenerator, directory, mask, Path.Combine(directory, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist, args.SkipIfFileAlreadyExists);
             }
             else
             {
@@ -127,7 +195,7 @@ namespace PlayListGenerator
                     }
 
                     // Generate playlist of the folder
-                    Run(playlistGenerator, dir, mask, Path.Combine(dir, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist, args.SkipIfFileAlreadyExists);
+                    RunGeneratePlayList(playlistGenerator, dir, mask, Path.Combine(dir, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist, args.SkipIfFileAlreadyExists);
                 }
             }
         }
@@ -143,7 +211,7 @@ namespace PlayListGenerator
         /// <param name="aRecursive">Include subfolders or not</param>
         /// <param name="minimumSong">Minimum songs to be included in playlist</param>
         /// <param name="aSkipIfFileAlreadyExists">If file already exists, do not overwrite it</param>
-        private static void Run(GeneratePlaylistBase aPlaylistGenerator, string aDirectory, string aMask, string aPlayListFilename, bool aRelativePath, bool aRecursive, int minimumSong, bool aSkipIfFileAlreadyExists)
+        private static void RunGeneratePlayList(GeneratePlaylistBase aPlaylistGenerator, string aDirectory, string aMask, string aPlayListFilename, bool aRelativePath, bool aRecursive, int minimumSong, bool aSkipIfFileAlreadyExists)
         {
             if (aSkipIfFileAlreadyExists && File.Exists(aPlayListFilename))
             {
@@ -151,7 +219,7 @@ namespace PlayListGenerator
                 Console.WriteLine($"Skipped : Playlist \"{aPlayListFilename}\" because file already exists");
                 return;
             }
-            
+
             // List the file to include in the playlist
             List<string> files = new List<string>(Directory.EnumerateFiles(aDirectory, aMask, ConvertToSearchOption(aRecursive)));
 

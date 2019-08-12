@@ -29,23 +29,26 @@ namespace PlayListGenerator
         [Option('S', "SubDirectories", HelpText = "Include subdirectories (recursive)")]
         public bool Recursive { get; set; }
 
-        [Option('F', "Format", HelpText = "Format of the generated playlist : m3u or xspf", Default = FormatEnum.m3u)]
+        [Option('F', nameof(Format), HelpText = "Format of the generated playlist : m3u or xspf", Default = FormatEnum.m3u)]
         public FormatEnum Format { get; set; }
 
-        [Option('R', "RelativePath", HelpText = "Generate relative paths.")]
+        [Option('R', nameof(RelativePath), HelpText = "Generate relative paths.")]
         public bool RelativePath { get; set; }
 
-        [Option('O', "OnePlaylistByFolder", HelpText = "Create 1 playlist by folder of the current folder")]
+        [Option('O', nameof(OnePlaylistByFolder), HelpText = "Create 1 playlist by folder of the current folder")]
         public bool OnePlaylistByFolder { get; set; }
 
-        [Option('M', "MinimumSongByPlaylist", HelpText = "Number minimum of song(s) in a playlist. Under this number a playlist will not be generated. If unspecified, minimum is 1.", Default = 1)]
+        [Option('M', nameof(MinimumSongByPlaylist), HelpText = "Number minimum of song(s) in a playlist. Under this number a playlist will not be generated. If unspecified, minimum is 1.", Default = 1)]
         public int MinimumSongByPlaylist { get; set; }
 
-        [Option('U', "UseCurrentFolderAsPlaylistName", HelpText = "If OnePlaylistByFolder(O) and SubDirectories(S) options selected, then combine this option to use the current folder as PlayListFilename. Usefull to avoid using the same PlayListFilename for all playlist generated")]
+        [Option('U', nameof(UseCurrentFolderAsPlaylistName), HelpText = "If OnePlaylistByFolder(O) and SubDirectories(S) options selected, then combine this option to use the current folder as PlayListFilename. Usefull to avoid using the same PlayListFilename for all playlist generated")]
         public bool UseCurrentFolderAsPlaylistName { get; set; }
 
-        [Option('K', "SkipIfFileAlreadyExists", HelpText = "When you want to generate only new playlists, without overriding files")]
+        [Option('K', nameof(SkipIfFileAlreadyExists), HelpText = "When you want to generate only new playlists, without overriding files")]
         public bool SkipIfFileAlreadyExists { get; set; }
+
+        [Option('C', nameof(CheckMode), HelpText = "")]
+        public bool CheckMode { get; set; }
 
         [Usage()]
         public static IEnumerable<Example> Examples

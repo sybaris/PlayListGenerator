@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Check_m3u.cs" />
     <Compile Include="CommandLineArguments.cs" />
     <Compile Include="GeneratePlaylistBase.cs" />
     <Compile Include="Generate_m3u.cs" />
