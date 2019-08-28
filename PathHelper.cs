@@ -37,6 +37,18 @@ namespace PlayListGenerator
         }
 
         /// <summary>
+        /// On some devices (Android for example), backslash is not recognized as a directory separator.
+        /// Slash is recognized on Windows and Android...
+        /// </summary>
+        /// <param name="aPath">Path that can contains '\' characters</param>
+        /// <returns>Same path with the characters '\' replaced by '/'</returns>
+        public static string PathSlashToBackslash(string aPath)
+        {
+            return aPath.Replace('\\','/');
+        }
+
+
+        /// <summary>
         /// Separate the directory and the file mask
         /// </summary>
         /// <param name="aPathAndMask">for example : "d:\foo\*.bar"</param>

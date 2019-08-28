@@ -229,7 +229,7 @@ namespace PlayListGenerator
                 var referencePath = Path.GetFullPath(aDirectory);
                 referencePath = referencePath.TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
                 for (int i = 0; i < files.Count; i++)
-                    files[i] = PathHelper.MakeRelative(files[i], referencePath);
+                    files[i] = PathHelper.PathSlashToBackslash(PathHelper.MakeRelative(files[i], referencePath));
             }
 
             if (files.Count < minimumSong)
