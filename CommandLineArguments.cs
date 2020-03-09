@@ -50,6 +50,9 @@ namespace PlayListGenerator
         [Option('C', nameof(CheckMode), HelpText = "")]
         public bool CheckMode { get; set; }
 
+        [Option('P', nameof(PlayListSuffix), HelpText = "Suffix of the playlist filename when UseCurrentFolderAsPlaylistName")]
+        public string PlayListSuffix { get; set; } = "";
+
         [Usage()]
         public static IEnumerable<Example> Examples
         {
