@@ -190,7 +190,8 @@ namespace PlayListGenerator
                 {
                     if (args.UseCurrentFolderAsPlaylistName)
                     {
-                        args.PlayListFilename = Path.Combine(dir, $"{dir.Split(Path.DirectorySeparatorChar).Last()}{args.PlayListSuffix}.{playlistGenerator.FileExtension}");
+                        string playlistFilename = $"{dir.Split(Path.DirectorySeparatorChar).Last()}{args.PlayListSuffix}.{playlistGenerator.FileExtension}";
+                        args.PlayListFilename = Path.Combine(Path.GetFullPath(dir), playlistFilename);
                     }
 
                     // Generate playlist of the folder
