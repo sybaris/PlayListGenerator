@@ -17,7 +17,7 @@ namespace PlayListGenerator
         static void Main(string[] args)
         {
             // We create your own command line parser to setup wanted options
-            CommandLine.Parser parser = new CommandLine.Parser(
+            using (CommandLine.Parser parser = new CommandLine.Parser(
                 with =>
                 {
                     //with.HelpWriter = Console.Error;
@@ -25,16 +25,16 @@ namespace PlayListGenerator
                     with.IgnoreUnknownArguments = false;
                     with.CaseSensitive = false;
                 }
-                );
+                ))
+            {
+                // Make the parsing
+                ParserResult<CommandLineArguments> result = parser.ParseArguments<CommandLineArguments>(args);
 
-            // Make the parsing
-            ParserResult<CommandLineArguments> result = parser.ParseArguments<CommandLineArguments>(args);
-
-            // In function of parser result, we run the program of we handle the errors
-            result.WithParsed<CommandLineArguments>(opts => Run(opts))
-                  .WithNotParsed<CommandLineArguments>((errs) => HandleParseError(errs, result)
-                );
-
+                // In function of parser result, we run the program of we handle the errors
+                result.WithParsed<CommandLineArguments>(opts => Run(opts))
+                      .WithNotParsed<CommandLineArguments>((errs) => HandleParseError(errs, result)
+                    );
+            }
             // Only for debug, when the program is launch under Visual Studio.
             if (Debugger.IsAttached)
             {
@@ -188,10 +188,9 @@ namespace PlayListGenerator
                 List<string> directories = new List<string>(Directory.EnumerateDirectories(directory));
                 foreach (var dir in directories)
                 {
-
                     if (args.UseCurrentFolderAsPlaylistName)
                     {
-                        args.PlayListFilename = Path.Combine(dir, $"{dir.Split(Path.DirectorySeparatorChar).Last()}.{playlistGenerator.FileExtension}");
+                        args.PlayListFilename = Path.Combine(dir, $"{dir.Split(Path.DirectorySeparatorChar).Last()}{args.PlayListSuffix}.{playlistGenerator.FileExtension}");
                     }
 
                     // Generate playlist of the folder
