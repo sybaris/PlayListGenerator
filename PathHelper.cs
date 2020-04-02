@@ -57,7 +57,7 @@ namespace PlayListGenerator
         {
             string directory = aPathAndMask;
             string mask = "*.*";
-            if (!Directory.Exists(directory))
+            if (directory.Contains("*") || directory.Contains("?") || !Directory.Exists(directory))
             {
                 directory = Path.GetDirectoryName(directory);
                 if (!Directory.Exists(directory) && directory != "")
