@@ -180,7 +180,7 @@ namespace PlayListGenerator
             if (!args.OnePlaylistByFolder)
             {
                 // Only 1 playlist file will be generated
-                RunGeneratePlayList(playlistGenerator, directory, mask, Path.Combine(directory, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist, args.SkipIfFileAlreadyExists);
+                RunGeneratePlayList(playlistGenerator, directory, mask, Path.Combine(directory, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist, args.SkipIfFileAlreadyExists, args.NumericSort);
             }
             else
             {
@@ -195,7 +195,7 @@ namespace PlayListGenerator
                     }
 
                     // Generate playlist of the folder
-                    RunGeneratePlayList(playlistGenerator, dir, mask, Path.Combine(dir, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist, args.SkipIfFileAlreadyExists);
+                    RunGeneratePlayList(playlistGenerator, dir, mask, Path.Combine(dir, args.PlayListFilename), args.RelativePath, args.Recursive, args.MinimumSongByPlaylist, args.SkipIfFileAlreadyExists, args.NumericSort);
                 }
             }
         }
@@ -211,7 +211,7 @@ namespace PlayListGenerator
         /// <param name="aRecursive">Include subfolders or not</param>
         /// <param name="minimumSong">Minimum songs to be included in playlist</param>
         /// <param name="aSkipIfFileAlreadyExists">If file already exists, do not overwrite it</param>
-        private static void RunGeneratePlayList(GeneratePlaylistBase aPlaylistGenerator, string aDirectory, string aMask, string aPlayListFilename, bool aRelativePath, bool aRecursive, int minimumSong, bool aSkipIfFileAlreadyExists)
+        private static void RunGeneratePlayList(GeneratePlaylistBase aPlaylistGenerator, string aDirectory, string aMask, string aPlayListFilename, bool aRelativePath, bool aRecursive, int minimumSong, bool aSkipIfFileAlreadyExists, bool aNumericPrefixSort)
         {
             if (aSkipIfFileAlreadyExists && File.Exists(aPlayListFilename))
             {
@@ -238,6 +238,10 @@ namespace PlayListGenerator
                 Console.WriteLine($"Minimun : Playlist \"{aPlayListFilename}\" not generated because threshold not reached");
                 return;
             }
+
+            // Sort files
+            if (aNumericPrefixSort)
+                files.Sort(new NumericPrefixSortComparer());
 
             // Generate the playlist file
             aPlaylistGenerator.GeneratePlayList(aPlayListFilename, files);

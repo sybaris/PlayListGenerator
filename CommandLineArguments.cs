@@ -53,6 +53,9 @@ namespace PlayListGenerator
         [Option('P', nameof(PlayListSuffix), HelpText = "Suffix of the playlist filename when UseCurrentFolderAsPlaylistName")]
         public string PlayListSuffix { get; set; } = "";
 
+        [Option('N', nameof(NumericSort), HelpText = "Sort by numeric prefix sort")]
+        public bool NumericSort { get; set; } 
+
         [Usage()]
         public static IEnumerable<Example> Examples
         {

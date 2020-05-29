@@ -54,6 +54,7 @@
     <Compile Include="GeneratePlaylistBase.cs" />
     <Compile Include="Generate_m3u.cs" />
     <Compile Include="Generate_xspf.cs" />
+    <Compile Include="NumericPrefixSortComparer.cs" />
     <Compile Include="PathHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
