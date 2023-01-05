@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PlayListGenerator": {
+      "commandName": "Project",
+      "commandLineArgs": "\"D:\\StockageTempo\\ELearning\\Pluralsight\\*.mp4\" -U -S -R -O -N -P\" - Playlist\""
+    }
+  }
+}
