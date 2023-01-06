@@ -5,7 +5,7 @@ namespace PlayListGenerator
     /// <summary>
     /// Generate a xspf playlist file
     /// </summary>
-    internal class Generate_xspf : GeneratePlaylistBase
+    internal class GenerateXspf : GeneratePlaylistBase
     {
         public override string FileExtension
         {

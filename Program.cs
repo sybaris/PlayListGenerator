@@ -153,10 +153,10 @@ namespace PlayListGenerator
             switch (args.Format)
             {
                 case CommandLineArguments.FileFormat.m3u:
-                    playlistGenerator = new Generate_m3u();
+                    playlistGenerator = new GenerateM3u();
                     break;
                 case CommandLineArguments.FileFormat.xspf:
-                    playlistGenerator = new Generate_xspf();
+                    playlistGenerator = new GenerateXspf();
                     break;
                 default:
                     throw new Exception("Unkown playlist format");
