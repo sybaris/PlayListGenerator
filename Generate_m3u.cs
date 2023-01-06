@@ -26,7 +26,7 @@ namespace PlayListGenerator
             return "";
         }
 
-        private string Convert(string stringToConvert)
+        private static string Convert(string stringToConvert)
         {
             // According to https://trac.videolan.org/vlc/ticket/21364?cversion=0&cnum_hist=2 if a # char is found in filename, we have to replace by %23
             return stringToConvert.Replace("#", "%23");

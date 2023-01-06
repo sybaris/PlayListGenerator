@@ -46,7 +46,6 @@ namespace PlayListGenerator
         private static void HandleParseError(IEnumerable<Error> errs, ParserResult<CommandLineArguments> parsingResult)
         {
             // Display a customized format of my Help
-            //Console.WriteLine("=============================================");
             HelpText myHelpText = HelpText.AutoBuild(parsingResult, onError =>
             {
                 HelpText nHelpText = new HelpText(SentenceBuilder.Create());
@@ -95,8 +94,7 @@ namespace PlayListGenerator
         private static bool RunCheckOneFile(string aPlayListFilename)
         {
             Debug.Assert(File.Exists(aPlayListFilename));
-            var check_m3u = new Check_m3u();
-            var result = check_m3u.CheckM3uFile(aPlayListFilename);
+            var result = CheckM3u.CheckM3uFile(aPlayListFilename);
             if (!string.IsNullOrEmpty(result))
             {
                 Console.WriteLine($"KO - File {aPlayListFilename} have this problem : {result}");
@@ -154,10 +152,10 @@ namespace PlayListGenerator
             GeneratePlaylistBase playlistGenerator;
             switch (args.Format)
             {
-                case CommandLineArguments.FormatEnum.m3u:
+                case CommandLineArguments.FileFormat.m3u:
                     playlistGenerator = new Generate_m3u();
                     break;
-                case CommandLineArguments.FormatEnum.xspf:
+                case CommandLineArguments.FileFormat.xspf:
                     playlistGenerator = new Generate_xspf();
                     break;
                 default:
@@ -172,7 +170,7 @@ namespace PlayListGenerator
             string mask = dirAndMask.Item2;
 
             if (string.IsNullOrEmpty(directory))
-                directory = Path.GetPathRoot(args.PlayListFilename);
+                directory = Path.GetPathRoot(args.PlayListFilename) ?? "";
             if (string.IsNullOrEmpty(directory))
                 directory = ".";
 

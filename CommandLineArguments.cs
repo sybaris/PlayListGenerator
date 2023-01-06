@@ -18,19 +18,19 @@ namespace PlayListGenerator
             ASX : Format de liste de lecture basé sur le XML développé par Microsoft pour Windows Media.
             WPL : Format de liste de lecture basé sur le XML développé par Microsoft pour Windows Media 9 et plus.         
          */
-        internal enum FormatEnum { m3u, xspf }
+        internal enum FileFormat { m3u, xspf }
 
         [Value(0, HelpText = "[drive:][path][filename_or_mask]", Required = true)]
-        public string PathAndMask { get; set; }
+        public string PathAndMask { get; set; } = "";
 
         [Value(1, HelpText = "[filename]", Required = false)]
-        public string PlayListFilename { get; set; }
+        public string PlayListFilename { get; set; } = "";
 
         [Option('S', "SubDirectories", HelpText = "Include subdirectories (recursive)")]
         public bool Recursive { get; set; }
 
-        [Option('F', nameof(Format), HelpText = "Format of the generated playlist : m3u or xspf", Default = FormatEnum.m3u)]
-        public FormatEnum Format { get; set; }
+        [Option('F', nameof(Format), HelpText = "Format of the generated playlist : m3u or xspf", Default = FileFormat.m3u)]
+        public FileFormat Format { get; set; }
 
         [Option('R', nameof(RelativePath), HelpText = "Generate relative paths.")]
         public bool RelativePath { get; set; }

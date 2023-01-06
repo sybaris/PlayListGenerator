@@ -12,7 +12,7 @@ namespace PlayListGenerator
 
     public class NumericPrefixSortComparer : IComparer<string>
     {
-        public int Compare(string x, string y)
+        public int Compare(string? x, string? y)
         {
             if (string.IsNullOrEmpty(x))
                 throw new ArgumentException($"Argument {nameof(x)} is null or empty");

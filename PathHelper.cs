@@ -59,7 +59,7 @@ namespace PlayListGenerator
             string mask = "*.*";
             if (directory.Contains("*") || directory.Contains("?") || !Directory.Exists(directory))
             {
-                directory = Path.GetDirectoryName(directory);
+                directory = Path.GetDirectoryName(directory) ?? "";
                 if (!Directory.Exists(directory) && directory != "")
                     throw new Exception("Wrong Path : " + aPathAndMask);
                 mask = aPathAndMask.Remove(0, directory.Length);
