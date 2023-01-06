@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace PlayListGenerator
 {
+    [Serializable]
     public class PlayListGeneratorException : Exception
     {
         public PlayListGeneratorException()
