@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PlayListGenerator
 {
-    public static class CheckM3u
+    public static class CheckM3U
     {
         public static string CheckM3uFile(string aFilename)
         {

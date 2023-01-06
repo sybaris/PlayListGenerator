@@ -5,7 +5,7 @@ namespace PlayListGenerator
     /// <summary>
     /// Generate a m3u playlist file
     /// </summary>
-    class GenerateM3u : GeneratePlaylistBase
+    class GenerateM3U : GeneratePlaylistBase
     {
 
         public override string FileExtension

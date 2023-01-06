@@ -94,7 +94,7 @@ namespace PlayListGenerator
         private static bool RunCheckOneFile(string aPlayListFilename)
         {
             Debug.Assert(File.Exists(aPlayListFilename));
-            var result = CheckM3u.CheckM3uFile(aPlayListFilename);
+            var result = CheckM3U.CheckM3uFile(aPlayListFilename);
             if (!string.IsNullOrEmpty(result))
             {
                 Console.WriteLine($"KO - File {aPlayListFilename} have this problem : {result}");
@@ -153,7 +153,7 @@ namespace PlayListGenerator
             switch (args.Format)
             {
                 case CommandLineArguments.FileFormat.m3u:
-                    playlistGenerator = new GenerateM3u();
+                    playlistGenerator = new GenerateM3U();
                     break;
                 case CommandLineArguments.FileFormat.xspf:
                     playlistGenerator = new GenerateXspf();
