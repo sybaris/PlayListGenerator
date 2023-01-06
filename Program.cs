@@ -121,7 +121,7 @@ namespace PlayListGenerator
             else if (args.Recursive)
             {
                 // Separate directory and file mask
-                var dirAndMask = PathHelper.ExtractDirectoryandMask(playListFilename);
+                var dirAndMask = PathHelper.ExtractDirectoryAndMask(playListFilename);
                 string directory = dirAndMask.Item1;
                 string mask = dirAndMask.Item2;
 
@@ -161,13 +161,13 @@ namespace PlayListGenerator
                     playlistGenerator = new GenerateXspf();
                     break;
                 default:
-                    throw new Exception("Unkown playlist format");
+                    throw new PlayListGeneratorException("Unkown playlist format");
             }
 
             args.PlayListFilename = string.IsNullOrEmpty(args.PlayListFilename) ? $"default.{playlistGenerator.FileExtension}" : args.PlayListFilename;
 
             // Separate directory and file mask
-            var dirAndMask = PathHelper.ExtractDirectoryandMask(args.PathAndMask);
+            var dirAndMask = PathHelper.ExtractDirectoryAndMask(args.PathAndMask);
             string directory = dirAndMask.Item1;
             string mask = dirAndMask.Item2;
 

@@ -53,21 +53,21 @@ namespace PlayListGenerator
         /// </summary>
         /// <param name="aPathAndMask">for example : "d:\foo\*.bar"</param>
         /// <returns>for example : return a tuple with "d:\foo" and "*.bar"</returns>
-        public static Tuple<string, string> ExtractDirectoryandMask(string aPathAndMask)
+        public static Tuple<string, string> ExtractDirectoryAndMask(string aPathAndMask)
         {
             string directory = aPathAndMask;
             string mask = "*.*";
-            if (directory.Contains("*") || directory.Contains("?") || !Directory.Exists(directory))
+            if (directory.Contains('*') || directory.Contains('?') || !Directory.Exists(directory))
             {
                 directory = Path.GetDirectoryName(directory) ?? "";
                 if (!Directory.Exists(directory) && directory != "")
-                    throw new Exception("Wrong Path : " + aPathAndMask);
+                    throw new ExtractDirectoryAndMaskException("Wrong Path : " + aPathAndMask);
                 mask = aPathAndMask.Remove(0, directory.Length);
                 if (mask.StartsWith(Path.DirectorySeparatorChar.ToString()))
                     mask = mask.Remove(0, 1);
             }
             if (!(mask.Contains('*') || mask.Contains('?')))
-                throw new Exception("Wrong Mask : " + aPathAndMask);
+                throw new ExtractDirectoryAndMaskException("Wrong Mask : " + aPathAndMask);
             return new Tuple<string, string>(directory, mask);
         }
     }

@@ -30,7 +30,7 @@ namespace PlayListGenerator
             return "<track><location>" + EncodeStringToXML(aFileName) + "</location></track>"+Environment.NewLine;
         }
 
-        private string EncodeStringToXML(string aStringToEncore)
+        private static string EncodeStringToXML(string aStringToEncore)
         {
             // From http://weblogs.sqlteam.com/mladenp/archive/2008/10/21/Different-ways-how-to-escape-an-XML-string-in-C.aspx
             return aStringToEncore.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("'", "&apos;");
