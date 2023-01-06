@@ -126,7 +126,7 @@ namespace PlayListGenerator
                 string mask = dirAndMask.Item2;
 
                 var playLists = Directory.GetFiles(directory, mask, SearchOption.AllDirectories);
-                int count = playLists.Count();
+                int count = playLists.Length;
                 int countError = 0;
                 foreach (var playlist in playLists)
                 {
