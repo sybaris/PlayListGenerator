@@ -48,12 +48,14 @@ namespace PlayListGenerator
             // Display a customized format of my Help
             HelpText myHelpText = HelpText.AutoBuild(parsingResult, onError =>
             {
-                var nHelpText = new HelpText(SentenceBuilder.Create());
-                nHelpText.Heading = HeadingInfo.Default;
-                nHelpText.Copyright = CopyrightInfo.Default;
-                nHelpText.AdditionalNewLineAfterOption = false; // avoid the default behavior (new line between every options)
-                nHelpText.AddDashesToOption = true;
-                nHelpText.MaximumDisplayWidth = 4000;
+                var nHelpText = new HelpText(SentenceBuilder.Create())
+                {
+                    Heading = HeadingInfo.Default,
+                    Copyright = CopyrightInfo.Default,
+                    AdditionalNewLineAfterOption = false, // avoid the default behavior (new line between every options)
+                    AddDashesToOption = true,
+                    MaximumDisplayWidth = 4000
+                };
                 nHelpText.AddOptions(parsingResult);
                 return HelpText.DefaultParsingErrorsHandler(parsingResult, nHelpText);
             },
