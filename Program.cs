@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace PlayListGenerator
 {
-    class Program
+    static class Program
     {
         /// <summary>
         /// Main entry point of the program
