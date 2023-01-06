@@ -20,7 +20,6 @@ namespace PlayListGenerator
                 return "The playlist is empty";
 
             string directory = Path.GetFullPath(Path.GetDirectoryName(aFilename)??"");
-            string mask = Path.Combine(Path.GetFileName(aFilename));
 
             for (int i = 1; i < allText.Length; i++)
             {

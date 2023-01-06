@@ -17,7 +17,7 @@ namespace PlayListGenerator
         static void Main(string[] args)
         {
             // We create your own command line parser to setup wanted options
-            using (CommandLine.Parser parser = new CommandLine.Parser(
+            using (var parser = new Parser(
                 with =>
                 {
                     //with.HelpWriter = Console.Error;
@@ -48,7 +48,7 @@ namespace PlayListGenerator
             // Display a customized format of my Help
             HelpText myHelpText = HelpText.AutoBuild(parsingResult, onError =>
             {
-                HelpText nHelpText = new HelpText(SentenceBuilder.Create());
+                var nHelpText = new HelpText(SentenceBuilder.Create());
                 nHelpText.Heading = HeadingInfo.Default;
                 nHelpText.Copyright = CopyrightInfo.Default;
                 nHelpText.AdditionalNewLineAfterOption = false; // avoid the default behavior (new line between every options)
@@ -183,7 +183,7 @@ namespace PlayListGenerator
             else
             {
                 // Several playlists files will be generated (1 by folder)
-                List<string> directories = new List<string>(Directory.EnumerateDirectories(directory));
+                var directories = new List<string>(Directory.EnumerateDirectories(directory));
                 foreach (var dir in directories)
                 {
                     if (args.UseCurrentFolderAsPlaylistName)
@@ -219,7 +219,7 @@ namespace PlayListGenerator
             }
 
             // List the file to include in the playlist
-            List<string> files = new List<string>(Directory.EnumerateFiles(aDirectory, aMask, ConvertToSearchOption(aRecursive)));
+            var files = new List<string>(Directory.EnumerateFiles(aDirectory, aMask, ConvertToSearchOption(aRecursive)));
 
             //In case of relative paths, retreat the path of each founded filenames
             if (aRelativePath)
